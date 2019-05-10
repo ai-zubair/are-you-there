@@ -4,6 +4,7 @@
   "description": "A chat app built in Socket.io",
   "main": "index.js",
   "scripts": {
+    "start":"node server/server.js"
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/ai-zubair/are-you-there/issues"
   },
-  "homepage": "https://github.com/ai-zubair/are-you-there#readme"
+  "homepage": "https://github.com/ai-zubair/are-you-there#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
