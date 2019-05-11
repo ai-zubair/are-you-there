@@ -3,6 +3,8 @@ const http = require('http'); //to have explicit access to the http.Server insta
 const express = require('express');
 const socketIO = require('socket.io');
 
+const {generateMessage} = require('./utils/messageUtils');
+
 const publicPath = path.join(__dirname,'..','public'); //better styled path to use for static assets
 const PORT = process.env.PORT || 3000;
 
@@ -14,25 +16,13 @@ app.use(express.static(publicPath));
 
 io.on('connection',(socket)=>{
     //whenever a user connects greet him with a welcome message
-    socket.emit('newMsg',{
-        from:'Admin',
-        text:'Welcome to the Chat!',
-        createdAt:Date.now()
-    });
+    socket.emit('newMsg',generateMessage('Admin','Welcome to the Chat!'));
     //whenever a new user connects inform rest of the users about it
-    socket.broadcast.emit('newMsg',{
-        from:'Admin',
-        text:'A new user has joined the chat!',
-        createdAt: Date.now()
-    })
+    socket.broadcast.emit('newMsg',generateMessage('Admin','A new user has joined the chat!'));
 
     socket.on('createMsg',(newMsg)=>{
         console.log('User has created a new message!',newMsg);
-        io.emit('newMsg',{
-            from : newMsg.from,
-            text: newMsg.text,
-            createdAt: Date.now()
-        })
+        io.emit('newMsg',generateMessage(newMsg.from,newMsg.text));
     })
 
     socket.on('disconnect',()=>{
