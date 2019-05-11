@@ -10,6 +10,24 @@ socket.on('newMsg',(msg)=>{
     console.log(msg);
 })
 
+socket.emit('createMsg',{
+    from: 'Zubair',
+    text:'This is really cool mate!'
+},(status)=>{
+    console.log(status);
+})
+
 socket.on('disconnect',()=>{
     console.log('Disconnected from the server!');
+})
+
+$('#messageBox').on('submit',(e)=>{
+    e.preventDefault();
+    socket.emit('createMsg',{
+        from: 'Zubair',
+        text: $('[name=message]').val()
+    },(status)=>{
+        console.log(status);
+    });
+    $('[name=message]').val('');
 })

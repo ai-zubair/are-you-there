@@ -1,0 +1,40 @@
+*{
+ box-sizing: border-box;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
+#messageBox{
+    background-color: white;
+    position: fixed;
+    bottom: 0px;
+    padding: 10px;
+    width:100%;
+    display: flex;
+}
+
+#messageBox input{
+    flex-basis: 74%;
+    margin-right: 2%;
+    padding: 5px;
+    border:none;
+    border-bottom:2px solid grey; 
+    transition: border-bottom 0.5s ease;
+    font-size: 14px;
+}
+#messageBox input:focus{
+    outline: none;
+    border-bottom:2px solid rgb(30, 98, 181); 
+}
+#messageBox button{
+    flex-basis: 24%;
+}
+
+#messages{
+    width: 100%;
+    padding:10px;
+    margin-bottom: 50px;
+    border: 2px solid red;
+}

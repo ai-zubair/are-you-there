@@ -20,9 +20,10 @@ io.on('connection',(socket)=>{
     //whenever a new user connects inform rest of the users about it
     socket.broadcast.emit('newMsg',generateMessage('Admin','A new user has joined the chat!'));
 
-    socket.on('createMsg',(newMsg)=>{
+    socket.on('createMsg',(newMsg,callback)=>{
         console.log('User has created a new message!',newMsg);
         io.emit('newMsg',generateMessage(newMsg.from,newMsg.text));
+        callback('Sent');
     })
 
     socket.on('disconnect',()=>{
