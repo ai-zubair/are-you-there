@@ -17,13 +17,13 @@ io.on('connection',(socket)=>{
     socket.emit('newMsg',{
         from:'Admin',
         text:'Welcome to the Chat!',
-        createdAt:new Date().getTime()
+        createdAt:Date.now()
     });
     //whenever a new user connects inform rest of the users about it
     socket.broadcast.emit('newMsg',{
         from:'Admin',
-        text:'A new user has joined tha chat!',
-        createdAt: new Date().getTime()
+        text:'A new user has joined the chat!',
+        createdAt: Date.now()
     })
 
     socket.on('createMsg',(newMsg)=>{
@@ -31,7 +31,7 @@ io.on('connection',(socket)=>{
         io.emit('newMsg',{
             from : newMsg.from,
             text: newMsg.text,
-            createdAt: new Date().getTime()
+            createdAt: Date.now()
         })
     })
 
