@@ -13,15 +13,28 @@ const io = socketIO(server); //setting up this Server as web socket server
 app.use(express.static(publicPath));
 
 io.on('connection',(socket)=>{
-    console.log('A new user has connected!');
+    //whenever a user connects greet him with a welcome message
     socket.emit('newMsg',{
-        from: 'zubair.bashir@gmail.com',
-        text: 'Hey man what are you doing today?',
-        createdAt: Date()
+        from:'Admin',
+        text:'Welcome to the Chat!',
+        createdAt:new Date().getTime()
     });
-    socket.on('createMsg',(newMsg)=>{
-        console.log('User has created a new message!',newMsg)
+    //whenever a new user connects inform rest of the users about it
+    socket.broadcast.emit('newMsg',{
+        from:'Admin',
+        text:'A new user has joined tha chat!',
+        createdAt: new Date().getTime()
     })
+
+    socket.on('createMsg',(newMsg)=>{
+        console.log('User has created a new message!',newMsg);
+        io.emit('newMsg',{
+            from : newMsg.from,
+            text: newMsg.text,
+            createdAt: new Date().getTime()
+        })
+    })
+
     socket.on('disconnect',()=>{
         console.log('A user has disconnected!')
     })
