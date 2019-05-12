@@ -3,7 +3,7 @@ const http = require('http'); //to have explicit access to the http.Server insta
 const express = require('express');
 const socketIO = require('socket.io');
 
-const {generateMessage} = require('./utils/messageUtils');
+const {generateMessage,generateLocationMessage} = require('./utils/messageUtils');
 
 const publicPath = path.join(__dirname,'..','public'); //better styled path to use for static assets
 const PORT = process.env.PORT || 3000;
@@ -26,8 +26,8 @@ io.on('connection',(socket)=>{
         callback('Sent');
     })
 
-    socket.on('createLocationMsg',(locData)=>{
-        io.emit('newMsg',generateMessage('Zubair',`Lt:${locData.lat}\nLn:${locData.lng}`))
+    socket.on('createLocationMsg',(cordinates)=>{
+        io.emit('newLocationMsg',generateLocationMessage('Zubair',cordinates.lat,cordinates.lng))
     })
     socket.on('disconnect',()=>{
         console.log('A user has disconnected!')

@@ -97,10 +97,14 @@ header h1{
 }
 
 .message .msgText{
+    color:white;
     grid-area: msgText;
     justify-self: start;
     margin: 0px;
     margin-top: 2%;
+}
+.message a.msgText{
+    text-decoration: underline;
 }
 /* ----------------------------MESSAGE ENDS--------------------------- */
 
