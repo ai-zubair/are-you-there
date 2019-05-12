@@ -1,3 +1,8 @@
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
 *{
     box-sizing: border-box;
 }
@@ -5,16 +10,77 @@
 body{
     margin: 0px;
     padding: 0px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
-#messages{
+/* ----------------------------HEADER BEGINS--------------------------- */
+header{
+    width: 100%;
+    position: fixed;
+    top: 0%;
+    background-color:white;
+}
+header h1{
+    margin: 0%;
+    background-color: rgb(30, 123, 181); 
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bolder;
+    margin-bottom: 2%;
+    padding: 5px 0px;
+    box-shadow: 0px 0px 8px 0px gray;
+}
+/* ----------------------------HEADER ENDS--------------------------- */
+
+/* ----------------------------MESSAGE LIST BEGINS--------------------------- */
+#messageList{
     width: 100%;
     padding:10px;
-    margin-bottom: 50px;
-    /* border: 2px solid red; */
+    margin-top: 10%;
+    margin-bottom: 15%;
+    color: white;
+    font-size: 16px;
+}
+/* ----------------------------MESSAGE LIST ENDS--------------------------- */
+
+/* ----------------------------MESSAGE BEGINS--------------------------- */
+.message{
+    background-color: rgb(30, 98, 181); 
+    border-radius: 10px;
+    display: grid;
+    padding: 10px;
+    margin-top: 2%;
+    max-width: 75%;
+    word-break: break-all;
+    box-shadow: 0px 0px 5px 0px gray;
+}
+.messageItemsWrapper{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "sender time"
+                         "msgText msgText";
 }
 
+.messageItemsWrapper .sender{
+    grid-area: sender;
+    justify-self: start
+}
+
+.messageItemsWrapper .time{
+    grid-area: time;
+    justify-self: end
+}
+
+.messageItemsWrapper .msgText{
+    grid-area: msgText;
+    justify-self: start;
+    margin: 0px;
+    margin-top: 2%;
+}
+/* ----------------------------MESSAGE ENDS--------------------------- */
+
+/* ----------------------------MESSAGE BOX BEGINS--------------------------- */
 #messageboxWrapper{
     width: 100%;
     background-color: white;
@@ -29,8 +95,8 @@ body{
     padding: 10px;
     width:98%;
     display: flex;
-    margin: 1.5% 1% 1% 1%;
-    box-shadow: 0px 0px 10px 2px rgb(70, 70, 70);
+    margin: 2% 1% 1% 1%;
+    box-shadow: 0px 0px 10px 0px gray;
     border-radius: 5px;
 }
 
@@ -53,10 +119,10 @@ body{
     flex-basis: 24%;
     border-radius: 10px;
     border: none;
-    background-color: rgb(40, 111, 198); 
+    background-color:  rgb(30, 123, 181); 
     color: white;
     font-size: 14px;
-    box-shadow: 0px 0px 5px 0px rgb(70, 70, 70);
+    box-shadow:none;
     transition:box-shadow 0.3s ease;
 }
 
@@ -65,9 +131,12 @@ body{
 }
 
 #messageBox button:hover{
-    box-shadow:none;
+    box-shadow: 0px 0px 5px 0px gray;
+    background-color: rgb(41, 147, 213); 
     cursor: pointer;
 }
+/* ----------------------------MESSAGE BOX ENDS--------------------------- */
+
 /*------------Clearfix: forces an element not to collapse upon content flow disruption------------*/
 .clearfix:after {
     content: "";

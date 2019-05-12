@@ -5,17 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Are You There?</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    Welcome to Are-You-There?
-    <div id="messages"></div>
-    <div id="messageboxWrapper" class="clearfix">
-        <form id="messageBox">
-            <input name='message' type="text" placeholder="Type some text" spellcheck="false"/>
-            <button>Send</button>
-        </form>
-    </div>
+    <header>
+       <h1>ARE YOU THERE?</h1>
+    </header>
+    <main>
+        <ul id="messageList"></ul>
+        <div id="messageboxWrapper" class="clearfix">
+            <form id="messageBox">
+                <input name='message' type="text" placeholder="Type some text" spellcheck="false" autocomplete=""/>
+                <button>Send</button>
+            </form>
+        </div>
+    </main>
+    
     <script src="/socket.io/socket.io.js" ></script>
     <script src="js/libs/jq.js"></script>
     <script src="js/main.js"></script>
