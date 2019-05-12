@@ -52,15 +52,25 @@ header h1{
     background-color: rgb(30, 98, 181); 
     border-radius: 0px 10px 10px 10px;
     padding: 10px;
-    margin-top: 2%;
-    min-width: 50%;
-    width: auto;
-    max-width: 75%;
-    display: inline-block;
     word-break: break-all;
-    box-shadow: 0px 0px 5px 0px gray;
+    box-shadow: 1px 2px 5px 0px grey;
     position: relative;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "sender time"
+                         "msgText msgText";
 }
+
+.messageItemsWrapper{
+    display: inline-block;
+    min-width: 50%;
+    max-width: 75%;
+}
+
+.outerMessageItemsWrapper{
+    margin-top: 2%;
+}
+
 .message::after{
     content: "";
 	position: absolute;
@@ -71,28 +81,22 @@ header h1{
 	border-bottom: 10px solid transparent;
 	border-right: 10px solid rgb(30, 98, 181);
 }
-.messageItemsWrapper{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-areas: "sender time"
-                         "msgText msgText";
-}
 
-.messageItemsWrapper .sender{
+.message .sender{
     grid-area: sender;
     justify-self: start;
     font-size: 12px;
     font-weight: lighter;
 }
 
-.messageItemsWrapper .time{
+.message .time{
     grid-area: time;
     justify-self: end;
     font-size: 12px;
     font-weight: lighter;
 }
 
-.messageItemsWrapper .msgText{
+.message .msgText{
     grid-area: msgText;
     justify-self: start;
     margin: 0px;
@@ -136,7 +140,6 @@ header h1{
 }
 
 #messageBox button{
-    flex-basis: 24%;
     border-radius: 10px;
     border: none;
     background-color:  rgb(30, 123, 181); 
@@ -146,11 +149,21 @@ header h1{
     transition:box-shadow 0.3s ease;
 }
 
+#messageBox span#location{
+    margin-right: 1%;
+    border-radius: 10px;
+    border: none;
+    background-color:  rgb(30, 123, 181);
+    color: white;
+    padding: 5px; 
+    transition:box-shadow 0.3s ease;
+}
+
 #messageBox button:focus{
     outline: none;
 }
 
-#messageBox button:hover{
+#messageBox button:hover,#messageBox span#location:hover{
     box-shadow: 0px 0px 5px 0px gray;
     background-color: rgb(41, 147, 213); 
     cursor: pointer;

@@ -26,6 +26,9 @@ io.on('connection',(socket)=>{
         callback('Sent');
     })
 
+    socket.on('createLocationMsg',(locData)=>{
+        io.emit('newMsg',generateMessage('Zubair',`Lt:${locData.lat}\nLn:${locData.lng}`))
+    })
     socket.on('disconnect',()=>{
         console.log('A user has disconnected!')
     })
