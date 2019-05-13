@@ -52,7 +52,7 @@ header h1{
     background-color: rgb(30, 98, 181); 
     border-radius: 0px 10px 10px 10px;
     padding: 10px;
-    word-break: break-all;
+    word-break: normal;
     box-shadow: 1px 2px 5px 0px grey;
     position: relative;
     display: grid;
