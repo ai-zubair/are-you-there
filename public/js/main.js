@@ -4,14 +4,14 @@ socket.on('connect',()=>{
 });
 socket.on('newMsg',(msg)=>{
     // console.log('New msg has been recieved!');
-    const newMsg = `<div class="outerMessageItemsWrapper"><div class='messageItemsWrapper'><div class='message'><span class="sender">${msg.from}</span><span class="time">${new Date(msg.createdAt).toLocaleTimeString('en-US')}</span><p class="msgText">${msg.text}</p></div></div></div>`;
+    const newMsg = `<div class="outerMessageItemsWrapper"><div class='messageItemsWrapper'><div class='message'><span class="sender">${msg.from}</span><span class="time">${moment(msg.createdAt).format('h:mm a')}</span><p class="msgText">${msg.text}</p></div></div></div>`;
     const messages=document.getElementById('messageList');
     messages.insertAdjacentHTML('beforeend',newMsg);
     // console.log(msg);
 })
 
 socket.on('newLocationMsg',(msg)=>{
-    const newMsg = `<div class="outerMessageItemsWrapper"><div class='messageItemsWrapper'><div class='message'><span class="sender">${msg.from}</span><span class="time">${new Date(msg.createdAt).toLocaleTimeString('en-US')}</span><a href=${msg.url} target="_blank" class="msgText">Here's my location!</a></div></div></div>`;
+    const newMsg = `<div class="outerMessageItemsWrapper"><div class='messageItemsWrapper'><div class='message'><span class="sender">${msg.from}</span><span class="time">${moment(msg.createdAt).format('h:mm a')}</span><a href=${msg.url} target="_blank" class="msgText">Here's my location!</a></div></div></div>`;
     const messages=document.getElementById('messageList');
     messages.insertAdjacentHTML('beforeend',newMsg);
 })
