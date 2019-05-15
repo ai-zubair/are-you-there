@@ -22,10 +22,26 @@
             </form>
         </div>
     </main>
-    
+    <script id='msgTemplate' type='text/template'>
+        <div class="outerMessageItemsWrapper">
+            <div class='messageItemsWrapper'>
+                <div class='message'>
+                    <span class="sender">{{from}}</span>
+                    <span class="time">{{at}}</span>
+                    {{#url}}
+                        <a href={{url}} target="_blank" class="msgText">Here's my location!</a>
+                    {{/url}}
+                    {{#text}}
+                        <p class="msgText">{{text}}</p>
+                    {{/text}}
+                </div>
+            </div>
+        </div>
+    </script>
     <script src="/socket.io/socket.io.js" ></script>
     <script src="js/libs/jq.js"></script>
     <script src="js/libs/moment.js"></script>
+    <script src="js/libs/mustache.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

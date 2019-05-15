@@ -3,17 +3,15 @@ socket.on('connect',()=>{
     console.log('Connected to the server!')
 });
 socket.on('newMsg',(msg)=>{
-    // console.log('New msg has been recieved!');
-    const newMsg = `<div class="outerMessageItemsWrapper"><div class='messageItemsWrapper'><div class='message'><span class="sender">${msg.from}</span><span class="time">${moment(msg.createdAt).format('h:mm a')}</span><p class="msgText">${msg.text}</p></div></div></div>`;
-    const messages=document.getElementById('messageList');
-    messages.insertAdjacentHTML('beforeend',newMsg);
-    // console.log(msg);
-})
-
-socket.on('newLocationMsg',(msg)=>{
-    const newMsg = `<div class="outerMessageItemsWrapper"><div class='messageItemsWrapper'><div class='message'><span class="sender">${msg.from}</span><span class="time">${moment(msg.createdAt).format('h:mm a')}</span><a href=${msg.url} target="_blank" class="msgText">Here's my location!</a></div></div></div>`;
-    const messages=document.getElementById('messageList');
-    messages.insertAdjacentHTML('beforeend',newMsg);
+    const messages=$('#messageList');
+    const newMsgTemplate = $('#msgTemplate').html();
+    const newMsg = Mustache.render(newMsgTemplate,{
+        from:msg.from,
+        at:moment(msg.createdAt).format('h:mm a'),
+        text:msg.text,
+        url:msg.url
+    });
+    messages.append(newMsg);
 })
 
 socket.on('disconnect',()=>{
