@@ -12,7 +12,7 @@ function autoScroll(messages){
     const scrollHeight = messages.prop('scrollHeight');
     console.log(`scrollTop:${scrollTop}\nclientHeight:${clientHeight}\nscrollHeight:${scrollHeight}\nprevMessageHeight:${prevMessageHeight}\nnewMessageHeight:${newMessageHeight}`)
     if(scrollHeight <= newMessageHeight+prevMessageHeight+clientHeight+scrollTop){
-        console.log('You gotta scroll');
+        messages.scrollTop(scrollHeight);
     }
 }
 
