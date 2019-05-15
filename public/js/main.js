@@ -2,6 +2,20 @@ const socket = io();
 socket.on('connect',()=>{
     console.log('Connected to the server!')
 });
+
+function autoScroll(messages){
+    const newMessage = messages.children().last();
+    const newMessageHeight = newMessage.innerHeight();
+    const prevMessageHeight = newMessage.prev().innerHeight();
+    const clientHeight = messages.prop('clientHeight');
+    const scrollTop = messages.prop('scrollTop');
+    const scrollHeight = messages.prop('scrollHeight');
+    console.log(`scrollTop:${scrollTop}\nclientHeight:${clientHeight}\nscrollHeight:${scrollHeight}\nprevMessageHeight:${prevMessageHeight}\nnewMessageHeight:${newMessageHeight}`)
+    if(scrollHeight <= newMessageHeight+prevMessageHeight+clientHeight+scrollTop){
+        console.log('You gotta scroll');
+    }
+}
+
 socket.on('newMsg',(msg)=>{
     const messages=$('#messageList');
     const newMsgTemplate = $('#msgTemplate').html();
@@ -12,10 +26,7 @@ socket.on('newMsg',(msg)=>{
         url:msg.url
     });
     messages.append(newMsg);
-})
-
-socket.on('disconnect',()=>{
-    console.log('Disconnected from the server!');
+    autoScroll(messages);
 })
 
 $('#messageBox').on('submit',(e)=>{
@@ -31,19 +42,20 @@ $('#messageBox').on('submit',(e)=>{
 
 $('#location').on('click',(e)=>{
     if("geolocation" in navigator){
-        $('#location').prop('disabled',true).text('Sending...');
         navigator.geolocation.getCurrentPosition((position)=>{
             socket.emit('createLocationMsg',{
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             });
-            $('#location').prop('disabled',false).text('Location');
         },(err)=>{
             alert('Failed to fetch the location!');
-            $('#location').prop('disabled',false).text('Location');
             console.log(err)
         })
     }else{
         alert(`Your browser doesn't support geo-location!`)
     }
+})
+
+socket.on('disconnect',()=>{
+    console.log('Disconnected from the server!');
 })
