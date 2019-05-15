@@ -31,16 +31,16 @@ $('#messageBox').on('submit',(e)=>{
 
 $('#location').on('click',(e)=>{
     if("geolocation" in navigator){
-        $(this).attr('disabled','disabled').text('Sending...');
+        $('#location').prop('disabled',true).text('Sending...');
         navigator.geolocation.getCurrentPosition((position)=>{
             socket.emit('createLocationMsg',{
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             });
-            $(this).removeAttr('disabled','disabled').text('Location');
+            $('#location').prop('disabled',false).text('Location');
         },(err)=>{
             alert('Failed to fetch the location!');
-            $(this).removeAttr('disabled','disabled').text('Location');
+            $('#location').prop('disabled',false).text('Location');
             console.log(err)
         })
     }else{
