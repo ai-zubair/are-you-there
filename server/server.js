@@ -8,15 +8,11 @@ const {generateMessage,generateLocationMessage} = require('./utils/messageUtils'
 
 const publicPath = path.join(__dirname,'..','public'); //better styled path to use for static assets
 const PORT = process.env.PORT || 3000;
-var certOptions = {
-    key: fs.readFileSync(path.resolve('server/SSL/server.key')),
-    cert: fs.readFileSync(path.resolve('server/SSL/server.crt'))
-  }
 
 const app = express();
 
 
-const server = http.createServer(certOptions,app); //creating an instance of http.Server
+const server = http.createServer(app); //creating an instance of http.Server
 const io = socketIO(server); //setting up this Server as web socket server
 
 app.use(express.static(publicPath));
