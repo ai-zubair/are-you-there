@@ -10,38 +10,24 @@
 </head>
 <body>
     <header>
-       <h1>ARE YOU THERE?</h1>
+        <h1>ARE YOU THERE?</h1>
     </header>
-    <main>
-        <div id="messageList"></div>
-        <div id="messageboxWrapper" class="clearfix">
-            <form id="messageBox">
-                <input name='message' type="text" placeholder="Type some text" autofocus spellcheck="false" autocomplete=""/>
-                <span id="location">Location</span>
-                <button id="send">Send</button>
-            </form>
-        </div>
-    </main>
-    <script id='msgTemplate' type='text/template'>
-        <div class="outerMessageItemsWrapper">
-            <div class='messageItemsWrapper'>
-                <div class='message'>
-                    <span class="sender">{{from}}</span>
-                    <span class="time">{{at}}</span>
-                    {{#url}}
-                        <a href={{url}} target="_blank" class="msgText">Here's my location!</a>
-                    {{/url}}
-                    {{#text}}
-                        <p class="msgText">{{text}}</p>
-                    {{/text}}
+    <main id="joinpage">
+        <form action="chat.html" method="GET" id="signup">
+                <div class='userInfoWrapper'>
+                    <span>What Do We Call You?</span>
+                    <div class="userInfo">
+                        <input name="username" type="text" autofocus spellcheck="false" placeholder="Username">
+                    </div>
                 </div>
-            </div>
-        </div>
-    </script>
-    <script src="/socket.io/socket.io.js" ></script>
-    <script src="js/libs/jq.js"></script>
-    <script src="js/libs/moment.js"></script>
-    <script src="js/libs/mustache.js"></script>
-    <script src="js/main.js"></script>
+                <div class='userInfoWrapper'>
+                    <span>Where Do Wanna Go?</span>
+                    <div class="userInfo">
+                        <input name="room" type="text" autofocus spellcheck="false" placeholder="Room Name">
+                    </div>
+                </div>
+                <button>Take Me There!</button>
+        </form>    
+    </main>
 </body>
 </html>

@@ -1,5 +1,6 @@
 const path = require('path'); //to get rid of the path style-problem when serving static content
 const http = require('http'); //to have explicit access to the http.Server instance 
+const fs = require('fs');
 const express = require('express');
 const socketIO = require('socket.io');
 
@@ -7,9 +8,15 @@ const {generateMessage,generateLocationMessage} = require('./utils/messageUtils'
 
 const publicPath = path.join(__dirname,'..','public'); //better styled path to use for static assets
 const PORT = process.env.PORT || 3000;
+var certOptions = {
+    key: fs.readFileSync(path.resolve('server/SSL/server.key')),
+    cert: fs.readFileSync(path.resolve('server/SSL/server.crt'))
+  }
 
 const app = express();
-const server = http.createServer(app); //creating an instance of http.Server
+
+
+const server = http.createServer(certOptions,app); //creating an instance of http.Server
 const io = socketIO(server); //setting up this Server as web socket server
 
 app.use(express.static(publicPath));
@@ -35,5 +42,5 @@ io.on('connection',(socket)=>{
 })
 
 server.listen(PORT,()=>{
-    console.log(`Sever has been fired up @ port ${PORT}`)
+    console.log(`Server has been fired up @ port ${PORT}`)
 })
