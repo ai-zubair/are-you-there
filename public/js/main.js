@@ -25,8 +25,20 @@ socket.on('newMsg',(msg)=>{
     autoScroll(messages);
 })
 
-socket.on('userListUpdate',(userList)=>{
-    console.log('User list has been updated',userList);
+socket.on('userListUpdate',(roomUserData)=>{
+    $('#chat_list').html('');
+    const params = $.deparam(window.location.search);
+    roomUserData.users.forEach( user => {
+        if(user === params.username){
+            return;
+        }
+        const roomUserTemplate = $('#roomUserTemplate').html();
+        const roomUser = Mustache.render(roomUserTemplate,{
+            name:user,
+            time:moment(roomUserData.at).format('ddd Do MMM, h:mm a')
+        })
+        $('#chat_list').append(roomUser);
+    })
 })
 
 $('#messageBox').on('submit',(e)=>{

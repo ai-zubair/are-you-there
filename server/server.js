@@ -3,6 +3,7 @@ const http = require('http'); //to have explicit access to the http.Server insta
 const fs = require('fs');
 const express = require('express');
 const socketIO = require('socket.io');
+const moment = require('moment');
 
 const { generateMessage,generateLocationMessage } = require('./utils/messageUtils');
 const { isValidString } = require('./utils/validations');
@@ -32,7 +33,10 @@ io.on('connection',(socket)=>{
             //greet him with a welcome message
             socket.emit('newMsg',generateMessage('Admin','Welcome to the Chat!'));
             //send an updated user list to the group
-            io.to(params.room).emit('userListUpdate',userList.getUserList(params.room));
+            io.to(params.room).emit('userListUpdate',{
+                users:userList.getUserList(params.room),
+                at:moment().valueOf()
+            });
             //inform the group about the new user
             socket.broadcast.to(params.room).emit('newMsg',generateMessage('Admin',`${params.username} has joined the chat!`));
         }else{
@@ -53,7 +57,10 @@ io.on('connection',(socket)=>{
         const user = userList.removeUser(socket.id);
         if(user){
             //remove the user from the room list
-            io.to(user.room).emit('userListUpdate',userList.getUserList(user.room));
+            io.to(user.room).emit('userListUpdate',{
+                users:userList.getUserList(user.room),
+                at:moment().valueOf()
+            });
             //notify all the room users about this leaving
             io.to(user.room).emit('newMsg',generateMessage('Admin',`${user.name} has left the chat!`))
         }
