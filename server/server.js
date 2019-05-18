@@ -45,13 +45,19 @@ io.on('connection',(socket)=>{
         
     })
     socket.on('createMsg',(newMsg,callback)=>{
-        console.log('User has created a new message!',newMsg);
-        io.emit('newMsg',generateMessage(newMsg.from,newMsg.text));
+        const user = userList.getUser(socket.id);
+        console.log(user);
+        if(user && isValidString(newMsg.text)){
+            io.to(user.room).emit('newMsg',generateMessage(user.name,newMsg.text));
+        }
         callback('Sent');
     })
 
     socket.on('createLocationMsg',(cordinates)=>{
-        io.emit('newMsg',generateLocationMessage('Zubair',cordinates.lat,cordinates.lng))
+        const user = userList.getUser(socket.id);
+        if(user){
+            io.to(user.room).emit('newMsg',generateLocationMessage(user.name,cordinates.lat,cordinates.lng))
+        }
     })
     socket.on('disconnect',()=>{
         const user = userList.removeUser(socket.id);

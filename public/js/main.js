@@ -45,7 +45,6 @@ $('#messageBox').on('submit',(e)=>{
     e.preventDefault();
     const params = $.deparam(window.location.search);
     socket.emit('createMsg',{
-        from: params.username,
         text: $('[name=message]').val()
     },(status)=>{
         // console.log(status);
