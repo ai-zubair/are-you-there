@@ -10,7 +10,6 @@ socket.on('connect',()=>{
             window.location.href = '/';
         }
     });
-    console.log(params);
 });
 
 socket.on('newMsg',(msg)=>{
