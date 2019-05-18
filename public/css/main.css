@@ -20,17 +20,37 @@ header{
     top: 0%;
     background-color:white;
     z-index: 999;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-areas: 'hamIcon title userPic';
+    align-items: center;
+    background-color: rgb(30, 123, 181); 
 }
 header h1{
+    grid-area: title;
     margin: 0%;
-    background-color: rgb(30, 123, 181); 
     color: white;
-    font-size: 18px;
+    font-size: 21px;
     text-align: center;
     font-weight: bolder;
-    margin-bottom: 2%;
     padding: 5px 0px;
-    box-shadow: 0px 0px 8px 0px gray;
+}
+header svg,header img{
+    height: 18px;
+    width: 18px;
+}
+
+header svg{
+    grid-area: hamIcon;
+    margin-left: 10px;
+
+}
+
+header img{
+    grid-area: userPic;
+    margin-right: 10px;
+    justify-self: end;
+
 }
 /* ----------------------------HEADER ENDS--------------------------- */
 
