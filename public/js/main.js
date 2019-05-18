@@ -25,6 +25,10 @@ socket.on('newMsg',(msg)=>{
     autoScroll(messages);
 })
 
+socket.on('userListUpdate',(userList)=>{
+    console.log('User list has been updated',userList);
+})
+
 $('#messageBox').on('submit',(e)=>{
     e.preventDefault();
     const params = $.deparam(window.location.search);

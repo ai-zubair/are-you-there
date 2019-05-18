@@ -6,26 +6,34 @@ const socketIO = require('socket.io');
 
 const { generateMessage,generateLocationMessage } = require('./utils/messageUtils');
 const { isValidString } = require('./utils/validations');
+const { Users } = require('./utils/users');
 
 const publicPath = path.join(__dirname,'..','public'); //better styled path to use for static assets
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 
-
 const server = http.createServer(app); //creating an instance of http.Server
 const io = socketIO(server); //setting up this Server as web socket server
+const userList = new Users();
 
 app.use(express.static(publicPath));
 
 io.on('connection',(socket)=>{
-    //user joining a room
+    //user requesting to join a room
     socket.on('join',(params,callback)=>{
         if(isValidString(params.username)&&isValidString(params.room)){
+            //put the user into the speicfied room and create the room if its doesn't exist already
             socket.join(params.room);
-            //whenever a user connects greet him with a welcome message
+            //remove the user from any other room he's joined in
+            userList.removeUser(socket.id);
+            //add the user to the new room
+            userList.addUser(socket.id,params.username,params.room);
+            //greet him with a welcome message
             socket.emit('newMsg',generateMessage('Admin','Welcome to the Chat!'));
-            //whenever a new user connects inform rest of the users about it
+            //send an updated user list to the group
+            io.to(params.room).emit('userListUpdate',userList.getUserList(params.room));
+            //inform the group about the new user
             socket.broadcast.to(params.room).emit('newMsg',generateMessage('Admin',`${params.username} has joined the chat!`));
         }else{
             callback('Invalid Username | Roomname');
@@ -42,6 +50,13 @@ io.on('connection',(socket)=>{
         io.emit('newMsg',generateLocationMessage('Zubair',cordinates.lat,cordinates.lng))
     })
     socket.on('disconnect',()=>{
+        const user = userList.removeUser(socket.id);
+        if(user){
+            //remove the user from the room list
+            io.to(user.room).emit('userListUpdate',userList.getUserList(user.room));
+            //notify all the room users about this leaving
+            io.to(user.room).emit('newMsg',generateMessage('Admin',`${user.name} has left the chat!`))
+        }
         console.log('A user has disconnected!')
     })
 })
