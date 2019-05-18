@@ -1,20 +1,17 @@
 const socket = io();
-socket.on('connect',()=>{
-    console.log('Connected to the server!')
-});
 
-function autoScroll(messages){
-    const newMessage = messages.children().last();
-    const newMessageHeight = newMessage.innerHeight();
-    const prevMessageHeight = newMessage.prev().innerHeight();
-    const clientHeight = messages.prop('clientHeight');
-    const scrollTop = messages.prop('scrollTop');
-    const scrollHeight = messages.prop('scrollHeight');
-    console.log(`scrollTop:${scrollTop}\nclientHeight:${clientHeight}\nscrollHeight:${scrollHeight}\nprevMessageHeight:${prevMessageHeight}\nnewMessageHeight:${newMessageHeight}`)
-    if(scrollHeight <= newMessageHeight+prevMessageHeight+clientHeight+scrollTop){
-        messages.scrollTop(scrollHeight);
-    }
-}
+socket.on('connect',()=>{
+    console.log('Connected to the server!');
+    const params = $.deparam(window.location.search);
+    socket.emit('join',params,(err)=>{
+        if(!err){
+            console.log('Success Join!')
+        }else{
+            window.location.href = '/';
+        }
+    });
+    console.log(params);
+});
 
 socket.on('newMsg',(msg)=>{
     const messages=$('#messageList');
@@ -31,8 +28,9 @@ socket.on('newMsg',(msg)=>{
 
 $('#messageBox').on('submit',(e)=>{
     e.preventDefault();
+    const params = $.deparam(window.location.search);
     socket.emit('createMsg',{
-        from: 'Zubair',
+        from: params.username,
         text: $('[name=message]').val()
     },(status)=>{
         // console.log(status);
@@ -59,3 +57,16 @@ $('#location').on('click',(e)=>{
 socket.on('disconnect',()=>{
     console.log('Disconnected from the server!');
 })
+
+function autoScroll(messages){
+    const newMessage = messages.children().last();
+    const newMessageHeight = newMessage.innerHeight();
+    const prevMessageHeight = newMessage.prev().innerHeight();
+    const clientHeight = messages.prop('clientHeight');
+    const scrollTop = messages.prop('scrollTop');
+    const scrollHeight = messages.prop('scrollHeight');
+    if(scrollHeight <= newMessageHeight+prevMessageHeight+clientHeight+scrollTop){
+        messages.scrollTop(scrollHeight);
+    }
+}
+

@@ -4,7 +4,8 @@ const fs = require('fs');
 const express = require('express');
 const socketIO = require('socket.io');
 
-const {generateMessage,generateLocationMessage} = require('./utils/messageUtils');
+const { generateMessage,generateLocationMessage } = require('./utils/messageUtils');
+const { isValidString } = require('./utils/validations');
 
 const publicPath = path.join(__dirname,'..','public'); //better styled path to use for static assets
 const PORT = process.env.PORT || 3000;
@@ -18,11 +19,19 @@ const io = socketIO(server); //setting up this Server as web socket server
 app.use(express.static(publicPath));
 
 io.on('connection',(socket)=>{
-    //whenever a user connects greet him with a welcome message
-    socket.emit('newMsg',generateMessage('Admin','Welcome to the Chat!'));
-    //whenever a new user connects inform rest of the users about it
-    socket.broadcast.emit('newMsg',generateMessage('Admin','A new user has joined the chat!'));
-
+    //user joining a room
+    socket.on('join',(params,callback)=>{
+        if(isValidString(params.username)&&isValidString(params.room)){
+            socket.join(params.room);
+            //whenever a user connects greet him with a welcome message
+            socket.emit('newMsg',generateMessage('Admin','Welcome to the Chat!'));
+            //whenever a new user connects inform rest of the users about it
+            socket.broadcast.to(params.room).emit('newMsg',generateMessage('Admin',`${params.username} has joined the chat!`));
+        }else{
+            callback('Invalid Username | Roomname');
+        }
+        
+    })
     socket.on('createMsg',(newMsg,callback)=>{
         console.log('User has created a new message!',newMsg);
         io.emit('newMsg',generateMessage(newMsg.from,newMsg.text));
