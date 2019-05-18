@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    <!---------------------------------------- SVG DEFINITION SECTION BEGINS ----------------------------------------->
     <svg id="svgDefs">
         <defs>
             <symbol id='hamIcon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21.1 19'>
@@ -30,21 +31,27 @@
             </symbol>
         </defs>
     </svg>
+    <!---------------------------------------- SVG DEFINITION SECTION ENDS ----------------------------------------->
 
+    <!---------------------------------------- HEADER SECTION BEGINS ----------------------------------------->
     <header>
         <svg id="hamburger"><use xlink:href="#hamIcon"></use></svg>
         <h1>ARE YOU THERE?</h1> 
         <svg id="userPic"><use xlink:href="#profileIcon"></svg>
     </header>
+    <!---------------------------------------- HEADER SECTION ENDS ----------------------------------------->
+
+    <!---------------------------------------- NAV SECTION BEGINS ----------------------------------------->
     <nav>
-        <div id="peopleWrapper">
-            <div id="people">
-                <span>Look Who's Here!</span>
-                <svg id="closeButton"><use xlink:href="#closeIcon"></use></svg>
-            </div>
-            <div id="chat_list"></div>
+        <div id="people">
+            <span>Look Who's Here!</span>
+            <svg id="closeButton"><use xlink:href="#closeIcon"></use></svg>
         </div>
+        <div id="chat_list"></div>
     </nav>
+    <!---------------------------------------- NAV SECTION ENDS ----------------------------------------->
+
+    <!---------------------------------------- MAIN SECTION BEGINS ----------------------------------------->
     <main>
         <div id="overlay" class="hideOverlay"></div>
         <div id="messageList"></div>
@@ -56,6 +63,9 @@
             </form>
         </div>
     </main>
+    <!---------------------------------------- NAV SECTION BEGINS ----------------------------------------->
+
+    <!---------------------------------------- TEMPLATE SECTION BEGINS ----------------------------------------->
     <script id='msgTemplate' type='text/template'>
         <div class="outerMessageItemsWrapper">
             <div class='messageItemsWrapper'>
@@ -72,11 +82,15 @@
             </div>
         </div>
     </script>
+    <!---------------------------------------- TEMPLATE SECTION ENDS ----------------------------------------->
+
+    <!---------------------------------------- SCRIPTS SECTION BEGINS ----------------------------------------->
     <script src="/socket.io/socket.io.js" ></script>
     <script src="js/libs/jq.js"></script>
     <script src="js/libs/moment.js"></script>
     <script src="js/libs/mustache.js"></script>
     <script src="js/libs/deparam.js"></script>
     <script src="js/main.js"></script>
+    <!---------------------------------------- SCRIPTS SECTION ENDS ----------------------------------------->
 </body>
 </html>

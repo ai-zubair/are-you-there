@@ -65,27 +65,20 @@ nav{
     position: fixed;
     z-index: 4;
     left:-100%;
-    transition: left 0.3s ease;
-}
-
-nav div#peopleWrapper{
-    position: relative;
     background: linear-gradient(to bottom, rgba(30,98,181,1) 0%, rgba(123,202,247,1) 100%);
     box-shadow: 2px 0px 10px 2px black;
-    width: 100%;
-    height: 100%;
     display: grid;
     grid-template-areas: "people"
                          "chatList";
     grid-template-rows: 5% 95%;
-    transition: transform 0.3s ease;
+    transition: left 0.3s ease;
 }
 
 .showNav{
     left: 0%;
 }
 
-nav div#peopleWrapper div#people{
+nav div#people{
     width: 100%;
     grid-area: people;
     align-self: center;
@@ -98,14 +91,14 @@ nav div#peopleWrapper div#people{
     grid-template-areas: "lookText closeIcon"
 }
 
-nav div#peopleWrapper div#people span{
+nav div#people span{
     grid-area: lookText;
     justify-self: start;
     padding: 0px 20px;
     align-self: center;
 }
 
-nav div#peopleWrapper div#people svg{
+nav div#people svg{
     grid-area: closeIcon;
     justify-self: end;
     align-self: center;
@@ -114,7 +107,7 @@ nav div#peopleWrapper div#people svg{
     margin: 5px;
 }
 
-nav div#peopleWrapper div#chat_list{
+nav div#chat_list{
     grid-area: chatList;
     display: flex;
     flex-direction: column;
@@ -122,7 +115,7 @@ nav div#peopleWrapper div#chat_list{
     padding: 20px;
 }
 
-nav div#peopleWrapper div#chat_list div.user{
+nav div#chat_list div.user{
     color:white;
     padding: 10px;
     display: grid;
@@ -132,20 +125,20 @@ nav div#peopleWrapper div#chat_list div.user{
     align-items: center;
 }
 
-nav div#peopleWrapper div#chat_list div.user svg.proPic{
+nav div#chat_list div.user svg.proPic{
     height: 50px;
     width: 50px;
     grid-area: proPic;
     border-radius: 50%;
 }
 
-nav div#peopleWrapper div#chat_list div.user span.userName{
+nav div#chat_list div.user span.userName{
     grid-area: username;
     font-size: 20px;
     padding: 0px 5px;
 }
 
-nav div#peopleWrapper div#chat_list div.user span.joinTime{
+nav div#chat_list div.user span.joinTime{
     grid-area: joinTime;
     font-size: 14px;
     padding: 5px;
