@@ -13,13 +13,16 @@ body{
     font-family: 'Quicksand', sans-serif;
 }
 
+#svgDefs{
+    display: none;
+}
 /* ----------------------------HEADER BEGINS--------------------------- */
 header{
     width: 100%;
     position: fixed;
     top: 0%;
     background-color:white;
-    z-index: 999;
+    z-index: 2;
     display: grid;
     grid-template-columns: 25% 50% 25%;
     grid-template-areas: 'hamIcon title userPic';
@@ -53,6 +56,94 @@ header img{
 
 }
 /* ----------------------------HEADER ENDS--------------------------- */
+
+/* ----------------------------SIDEBAR STARTS--------------------------- */
+nav{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.345);
+    position: fixed;
+    left: 0%;
+    z-index: 4;
+}
+
+nav div#peopleWrapper{
+    position: relative;
+    background: linear-gradient(to bottom, rgba(30,98,181,1) 0%, rgba(123,202,247,1) 100%);
+    width: 75%;
+    height: 100%;
+    display: grid;
+    grid-template-areas: "people"
+                         "chatList";
+    grid-template-rows: 5% 95%; 
+}
+
+nav div#peopleWrapper div#people{
+    width: 100%;
+    grid-area: people;
+    align-self: center;
+    justify-self: center;
+    color: white;
+    font-weight: bolder;
+    font-size: 18px;
+    border-bottom: 1px solid white;
+    display: grid;
+    grid-template-areas: "lookText closeIcon"
+}
+
+nav div#peopleWrapper div#people span{
+    grid-area: lookText;
+    justify-self: start;
+    padding: 0px 20px;
+    align-self: center;
+}
+
+nav div#peopleWrapper div#people svg{
+    grid-area: closeIcon;
+    justify-self: end;
+    height: 25px;
+    width: 25px;
+    margin: 5px;
+}
+
+nav div#peopleWrapper div#chat_list{
+    grid-area: chatList;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    padding: 20px;
+}
+
+nav div#peopleWrapper div#chat_list div.user{
+    color:white;
+    padding: 10px;
+    display: grid;
+    grid-template-areas: "proPic username"
+                         "proPic joinTime";
+    grid-template-columns: 25% 75%;
+    align-items: center;
+}
+
+nav div#peopleWrapper div#chat_list div.user svg.proPic{
+    height: 50px;
+    width: 50px;
+    grid-area: proPic;
+    border-radius: 50%;
+}
+
+nav div#peopleWrapper div#chat_list div.user span.userName{
+    grid-area: username;
+    font-size: 20px;
+    padding: 0px 5px;
+}
+
+nav div#peopleWrapper div#chat_list div.user span.joinTime{
+    grid-area: joinTime;
+    font-size: 14px;
+    padding: 5px;
+    border-bottom: 1px solid white;
+}
+/* ----------------------------SIDEBAR ENDS--------------------------- */
 
 /* ---------------------------- SIGNUP FORM BEGINS --------------------------- */
 main#joinpage{

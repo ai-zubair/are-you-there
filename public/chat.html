@@ -9,16 +9,42 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    <svg id="svgDefs">
+        <defs>
+            <symbol id='hamIcon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21.1 19'>
+                <line stroke="#fff" stroke-width="2px" x1='1.8' y1='2.4' x2='19.3' y2='2.4' />
+                <line stroke="#fff" stroke-width="2px" x1='1.8' y1='8.7' x2='19.3' y2='8.7' />
+                <line stroke="#fff" stroke-width="2px"  x1='1.8' y1='14.6' x2='19.3' y2='14.6' />
+            </symbol>
+            <symbol id="profileIcon" viewBox="0 0 60 60">
+                <g>
+                    <rect fill="#fff" width="60" height="60"/>
+                    <path fill="#cdcdcd" d="M29.8,28.9L29.8,28.9c-7.7,0-14-6.3-14-14v0c0-7.7,6.3-14,14-14h0c7.7,0,14,6.3,14,14v0
+                        C43.7,22.7,37.5,28.9,29.8,28.9z M54.2,55.3L54.2,55.3c0-13.5-10.9-24.4-24.4-24.4h0c-13.5,0-24.4,10.9-24.4,24.4v0V60h48.8V55.3z"
+                        />
+                </g>
+            </symbol>
+            <symbol  id="closeIcon" viewBox="0 0 16 14" >
+                <path d="M0.786106129,0.0667385401 L13.9332615,13.2138939" stroke="#fff"></path>
+                <path d="M0.316564867,13.4083842 L13.4637202,0.261228899" stroke="#fff"></path>
+            </symbol>
+        </defs>
+    </svg>
+
     <header>
-        <svg id='Layer_1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21.1 19'>
-            <line stroke="#fff" stroke-width="2px" x1='1.8' y1='2.4' x2='19.3' y2='2.4' />
-            <line stroke="#fff" stroke-width="2px" x1='1.8' y1='8.7' x2='19.3' y2='8.7' />
-            <line stroke="#fff" stroke-width="2px"  x1='1.8' y1='14.6' x2='19.3' y2='14.6' />
-        </svg>
+        <svg><use xlink:href="#hamIcon"></use></svg>
         <h1>ARE YOU THERE?</h1> 
         <img src='' alt='img'>
     </header>
-    <nav id="chat_list"></nav>
+    <nav>
+        <div id="peopleWrapper">
+            <div id="people">
+                <span>Look Who's Here!</span>
+                <svg><use xlink:href="#closeIcon"></use></svg>
+            </div>
+            <div id="chat_list"></div>
+        </div>
+    </nav>
     <main>
         <div id="messageList"></div>
         <div id="messageboxWrapper" class="clearfix">
