@@ -61,6 +61,19 @@ socket.on('disconnect',()=>{
     console.log('Disconnected from the server!');
 })
 
+$('#hamburger').on('click',()=>{
+    $('nav').toggleClass('showNav')
+    $('#overlay').toggleClass('hideOverlay')
+})
+$('#closeButton').on('click',()=>{
+    $('nav').toggleClass('showNav');
+    $('#overlay').toggleClass('hideOverlay');
+})
+$('#overlay').on('click',()=>{
+    $('nav').toggleClass('showNav');
+    $('#overlay').toggleClass('hideOverlay');
+})
+
 function autoScroll(messages){
     const newMessage = messages.children().last();
     const newMessageHeight = newMessage.innerHeight();

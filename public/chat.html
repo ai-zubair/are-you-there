@@ -32,20 +32,21 @@
     </svg>
 
     <header>
-        <svg><use xlink:href="#hamIcon"></use></svg>
+        <svg id="hamburger"><use xlink:href="#hamIcon"></use></svg>
         <h1>ARE YOU THERE?</h1> 
-        <img src='' alt='img'>
+        <svg id="userPic"><use xlink:href="#profileIcon"></svg>
     </header>
     <nav>
         <div id="peopleWrapper">
             <div id="people">
                 <span>Look Who's Here!</span>
-                <svg><use xlink:href="#closeIcon"></use></svg>
+                <svg id="closeButton"><use xlink:href="#closeIcon"></use></svg>
             </div>
             <div id="chat_list"></div>
         </div>
     </nav>
     <main>
+        <div id="overlay" class="hideOverlay"></div>
         <div id="messageList"></div>
         <div id="messageboxWrapper" class="clearfix">
             <form id="messageBox">
